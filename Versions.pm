@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 
-# $Id: Versions.pm,v 1.2 1996/06/24 09:20:44 kjahds Exp $
+# $Id: Versions.pm,v 1.3 1996/07/11 13:37:00 kjahds Exp $
 
 # Copyright (c) 1996, Kenneth J. Albanowski. All rights reserved.  This
 # program is free software; you can redistribute it and/or modify it under
@@ -11,8 +11,8 @@ package Sort::Versions;
 require Exporter;
 @ISA=qw(Exporter);
 
-@EXPORT=qw(&versions);
-@EXPORT_OK=qw(&versioncmp);
+@EXPORT=qw(&versions &versioncmp);
+@EXPORT_OK=qw();
 
 # This was the original implementation. It's more expensive due to the
 # nested data, but is also is a more transparent example of the algorithm.
@@ -79,8 +79,14 @@ Sort::Versions - a perl 5 module for sorting of revision-like numbers
 
 	...
 
-	use Sort::Versions qw(versioncmp);
+	use Sort::Versions;
 	print "lower" if versioncmp("1.2","1.2a")==-1;
+	
+	...
+	
+	use Sort::Versions;
+	%h = (1 => "d", 2 => "c", 3 => "b", 4 => "a");
+	@h = sort {versioncmp $h{$a}, $h{$b}} keys %h;
 
 =head1 DESCRIPTION	
 
@@ -117,10 +123,10 @@ the same as C<if(1.5 E<lt> 1.06) {...}>.
 
 =head1 USAGE
 
-Sort::Versions only exports C<versions> by default, which is a function
-suitable for giving to C<sort>. A second function, C<versioncmp> is
-available which takes two arguments and returns a cmp style comparison
-value.
+Sort::Versions exports C<versions> and C<versioncmp>. The former is a
+function suitable for handing directly to C<sort>. The second function,
+C<versioncmp>, takes two arguments and returns a cmp style comparison value.
+This is handy in indirect comparisons, as shown above.
 
 =head1 AUTHOR
 
@@ -137,6 +143,10 @@ __END__
 
 #
 # $Log: Versions.pm,v $
+# Revision 1.3  1996/07/11 13:37:00  kjahds
+# Added information on how to use versioncmp for indirect sort, and
+# exported it by default. Version bumped to 1.1.
+#
 # Revision 1.2  1996/06/24 09:20:44  kjahds
 # *** empty log message ***
 #

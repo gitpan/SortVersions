@@ -1,10 +1,10 @@
 use ExtUtils::MakeMaker;
 use Carp;
 
-# $Id: Makefile.PL,v 1.1.1.1 1996/06/24 09:06:18 kjahds Exp $
+# $Id: Makefile.PL,v 1.2 1996/07/11 13:37:00 kjahds Exp $
 
 &WriteMakefile(
 	NAME => "Sort::Versions",
 	DISTNAME => "SortVersions",
-	VERSION => "1.0",
+	VERSION => "1.1",
 );
